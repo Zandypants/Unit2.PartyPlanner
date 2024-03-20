@@ -4,9 +4,15 @@ const state = {
   events: [],
 };
 const renderKeys = ["name", "date", "location", "description"];
+let darkMode = true;
 
 // References
+const cssRoot = document.querySelector(":root");
 const allEventsSection = document.querySelector("#allEvents");
+const colorModeButton = document.querySelector("#colorMode");
+
+// Events
+if (colorModeButton) colorModeButton.onclick = switchMode;
 
 // Load page
 renderEvents();
@@ -25,11 +31,7 @@ async function getEvents () {
   }
 }
 
-// render state to screen
-  // choose tag to use for each event (or split details from event into separate tags for styling purposes?)
-  // create DOM elements
-  // add state objects values to relevant tags
-  // add all DOM elements to the page at once
+// <-- Display -->
 function render () {
   const elements = state.events.map((event) => {
     const eventSection = createNode("section", "", {class: "containerEvent"});
@@ -59,6 +61,21 @@ function render () {
 async function renderEvents() {
   await getEvents();
   render();
+}
+
+function switchMode() {
+  const modeNameFn = () => darkMode ? "dark" : "light";
+  let modeName = modeNameFn();
+
+  colorModeButton.style.setProperty("background-color", `var(--${modeName}Background)`);
+  colorModeButton.style.setProperty("color", `var(--${modeName}Contrast)`);
+
+  colorModeButton.innerText = `${capitalize(modeName)} Mode`;
+  darkMode = !darkMode;
+  
+  modeName = modeNameFn();
+  cssRoot.style.setProperty("--backgroundColor", `var(--${modeName}Background)`);
+  cssRoot.style.setProperty("--contrastColor", `var(--${modeName}Contrast)`);
 }
 
 // <-- DOM helpers -->

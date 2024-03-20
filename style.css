@@ -1,11 +1,15 @@
 :root {
-  --myGreen: #008170;
-  /* --myGreen: #00cc00; */
+  --darkBackground: #0F0F0F;
+  --lightBackground: white;
+  --darkContrast: #008170;
+  --lightContrast: black;
+  --backgroundColor: var(--darkBackground);
+  --contrastColor: var(--darkContrast);
 }
 
 body {
-  background-color: #0F0F0F;
-  color: var(--myGreen);
+  background-color: var(--backgroundColor);
+  color: var(--contrastColor);
 }
 
 h1 {
@@ -26,7 +30,7 @@ h1 {
 
 .containerEvent {
   margin: 0.5em;
-  border: var(--myGreen) 1px solid;
+  border: var(--contrastColor) 1px solid;
   max-width: 600px;
 }
 
@@ -34,8 +38,8 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  border-top: var(--myGreen) 1px solid;
-  border-bottom: var(--myGreen) 1px solid;
+  border-top: var(--contrastColor) 1px solid;
+  border-bottom: var(--contrastColor) 1px solid;
 }
 
 .containerFlex {
@@ -44,7 +48,7 @@ h1 {
 }
 
 .bordered {
-  border: var(--myGreen) 1px solid;
+  border: var(--contrastColor) 1px solid;
 }
 
 .eventName {
@@ -52,12 +56,7 @@ h1 {
   font-size: 1.5rem;
 }
 
-/* .eventTime, .eventDate, .eventLocation {
-  display: flex;
-  margin: 0;
-} */
-
 .eventDescription {
   display: flex;
-  border: #0F0F0F 0.4em solid; /* hack because padding isnt working inside flex */
+  border: var(--backgroundColor) 0.4em solid; /* hack because padding isnt working inside flex */
 }
