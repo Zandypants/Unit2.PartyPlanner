@@ -1,23 +1,22 @@
-// State
-// define some state to store event info
+// <-- State -->
 const state = {
   events: [],
 };
 const renderKeys = ["name", "date", "location", "description"];
 let darkMode = true;
 
-// References
+// <-- References -->
 const cssRoot = document.querySelector(":root");
 const allEventsSection = document.querySelector("#allEvents");
 const colorModeButton = document.querySelector("#colorMode");
 
-// Events
+// <-- Events -->
 if (colorModeButton) colorModeButton.onclick = switchMode;
 
-// Load page
+// <-- Load page -->
 renderEvents();
 
-// fetch event info from API (asynchronously)
+/** Fetches event info from API asynchronously */
 async function getEvents () {
   try {
     const fetchedEvents = await fetch("https://fsa-crud-2aa9294fe819.herokuapp.com/api/2402-FTB-ET-WEB-FT/events");
@@ -32,6 +31,7 @@ async function getEvents () {
 }
 
 // <-- Display -->
+/** Adds state to the DOM in order to display on page */
 function render () {
   const elements = state.events.map((event) => {
     const eventSection = createNode("section", "", {class: "containerEvent"});
@@ -39,9 +39,8 @@ function render () {
     const subSectionTop = document.createElement("section");
     subSectionTop.appendChild(createNode("div", capitalizeWords(event.name), {class: "eventName"}));
 
-    const subSectionMid = createNode("section", "", {class: "containerCenter"});
-
     const date = new Date(event.date);
+    const subSectionMid = createNode("section", "", {class: "containerCenter"});
     subSectionMid.replaceChildren(
       createNode("div", toClockTime(date.getHours(), date.getMinutes()), {class: "eventTime"}),
       createNode("div", date.toDateString(), {class: "eventDate"}),
@@ -58,11 +57,13 @@ function render () {
   allEventsSection.replaceChildren(...elements);
 }
 
+/** Simple helper to provide one-call page load */
 async function renderEvents() {
   await getEvents();
   render();
 }
 
+/** Switches between light and dark mode by modifying css variables */
 function switchMode() {
   const modeNameFn = () => darkMode ? "dark" : "light";
   let modeName = modeNameFn();
