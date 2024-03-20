@@ -1,4 +1,63 @@
+:root {
+  --myGreen: #008170;
+  /* --myGreen: #00cc00; */
+}
+
 body {
   background-color: #0F0F0F;
-  color: #008170;
+  color: var(--myGreen);
+}
+
+h1 {
+  text-align: center;
+}
+
+#allEvents {
+  display: flex;
+  padding: 1rem;
+  margin: 1rem;
+  flex-wrap: wrap;
+}
+
+#allEvents div {
+  padding: 0.1em;
+  margin: 0.1em;
+}
+
+.containerEvent {
+  margin: 0.5em;
+  border: var(--myGreen) 1px solid;
+  max-width: 600px;
+}
+
+.containerCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-top: var(--myGreen) 1px solid;
+  border-bottom: var(--myGreen) 1px solid;
+}
+
+.containerFlex {
+  display: flex;
+  flex-direction: row;
+}
+
+.bordered {
+  border: var(--myGreen) 1px solid;
+}
+
+.eventName {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* .eventTime, .eventDate, .eventLocation {
+  display: flex;
+  margin: 0;
+} */
+
+.eventDescription {
+  display: flex;
+  border: #0F0F0F 0.4em solid; /* hack because padding isnt working inside flex */
 }
