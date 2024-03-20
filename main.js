@@ -15,6 +15,7 @@ if (colorModeButton) colorModeButton.onclick = switchMode;
 
 // <-- Load page -->
 renderEvents();
+setInterval(renderEvents, 30000); // 30 second page refresh
 
 /** Fetches event info from API asynchronously */
 async function getEvents () {
@@ -24,7 +25,6 @@ async function getEvents () {
     const json = await fetchedEvents.json();
     // store json data in state
     state.events = json.data;
-    console.log(state.events);
   } catch (error) {
     console.log("Error caught:", error);
   }
@@ -61,6 +61,7 @@ function render () {
 async function renderEvents() {
   await getEvents();
   render();
+  console.log("Page refreshed");
 }
 
 /** Switches between light and dark mode by modifying css variables */
